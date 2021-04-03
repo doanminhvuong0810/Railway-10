@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS `Department` (
 ALTER TABLE  Department 
 MODIFY DepartmentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT;
 ALTER TABLE Department  
-CHANGE COLUMN DepartmentName1 DepartmentName1 NVARCHAR(100) NOT NULL;
+CHANGE COLUMN DepartmentName1 DepartmentName NVARCHAR(100) NOT NULL;
 
 
-INSERT INTO Department (DepartmentName1)
+INSERT INTO Department (DepartmentName)
 VALUE
 	    ('Marketing'),
 		( 'Sale'),
@@ -50,12 +50,15 @@ CREATE TABLE IF NOT EXISTS `Account` (
     CreateDate DATE
 );
 
-ALTER TABLE `Account`
-MODIFY FullName NVARCHAR(50) DEFAULT N'Đoàn Minh Vương';
-SELECT 
-    *
-FROM
-    `Account`;
+INSERT INTO `Account` (Email,Username,FullName,DepartmentID,PositionID,CreateDate)
+VALUE
+	    ('doanminhvuong0810@gmail.com','vuongdoan','Đoàn Minh Vương',100,1001,'2021-04-01'),
+		('dangtrunghai@gmail.com','haidang','Đặng Trung Hải',101,1002,'2021-04-02'),
+		('doanvanduong@gmail.com','duongdoan','Đoàn Văn Dương',102,1003,'2021-04-03'),
+		('nguyenvantam@gmail.com','tamnguyen','Nguyễn Văn Tâm',103,1004,'2021-04-04'),
+		('buivanduc@gmail.com','ducbui','Bùi Văn Đức',105,1005,'2021-04-05')
+		;
+
 
 CREATE TABLE IF NOT EXISTS `Group` (
     GroupID INT PRIMARY KEY AUTO_INCREMENT,
@@ -63,6 +66,14 @@ CREATE TABLE IF NOT EXISTS `Group` (
     CreatorID INT,
     CreateDate DATE
 );
+INSERT INTO `Group` (GroupName,CreatorID,CreateDate)
+VALUE
+	    ('CNV',10,'2020-04-01'),
+		('VND',11,'2020-04-01'),
+		('JKM',12,'2020-05-01'),
+		('HKV',13,'2020-06-02'),
+		('CNV',14,'2021-07-03')
+        ;
 
 CREATE TABLE IF NOT EXISTS `GroupAccount` (
     GroupID INT PRIMARY KEY AUTO_INCREMENT,
@@ -70,16 +81,38 @@ CREATE TABLE IF NOT EXISTS `GroupAccount` (
     CreatorID INT,
     CreateDate DATE
 );
-
+INSERT INTO `GroupAccount` (GroupName,CreatorID,CreateDate)
+VALUE
+	    ('CNV1001',5300,'2020-04-01'),
+		('VND1002',5301,'2020-04-01'),
+		('JKM1003',5302,'2020-05-01'),
+		('HKV1004',5303,'2020-06-02'),
+		('CNV1005',5304,'2021-07-03')
+        ;
 CREATE TABLE IF NOT EXISTS `TypeQuestion` (
     TypeID INT PRIMARY KEY AUTO_INCREMENT,
     TypeName VARCHAR(50)
 );
-
+INSERT INTO `TypeQuestion` (TypeName)
+VALUE
+	    ('Essay'),
+		( 'Multiple-Choice'),
+		( 'General'),
+		( 'Specific'),
+        ( 'Double-barrelled');
+        
 CREATE TABLE IF NOT EXISTS `CategoryQuestion` (
     CategoryID INT PRIMARY KEY AUTO_INCREMENT,
    CategoryName VARCHAR(50)
 );
+
+INSERT INTO `TypeQuestion` (TypeName)
+VALUE
+	    ('Essay'),
+		( 'Multiple-Choice'),
+		( 'General'),
+		( 'Specific'),
+        ( 'Double-barrelled');
 
 CREATE TABLE IF NOT EXISTS `Question` (
     QuestionID INT PRIMARY KEY AUTO_INCREMENT,
@@ -91,10 +124,10 @@ CREATE TABLE IF NOT EXISTS `Question` (
 );
 
 CREATE TABLE IF NOT EXISTS `Answer` (
-   AnswerID INT PRIMARY KEY AUTO_INCREMENT,
+    AnswerID INT PRIMARY KEY AUTO_INCREMENT,
     Content VARCHAR(50),
     QuestionID INT,
-   isCorrect BIT
+    isCorrect BIT
 );
 
 ALTER TABLE Answer
