@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `Department` (
     DepartmentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     DepartmentName VARCHAR(50) NOT NULL
 );
-ALTER TABLE Department 
+ALTER TABLE  Department 
 MODIFY DepartmentID INT NOT NULL PRIMARY KEY AUTO_INCREMENT;
 ALTER TABLE Department  
 CHANGE COLUMN DepartmentName1 DepartmentName1 NVARCHAR(100) NOT NULL;
@@ -41,14 +41,21 @@ FROM
     Position;  
 
 CREATE TABLE IF NOT EXISTS `Account` (
-    AccountID INT  PRIMARY KEY AUTO_INCREMENT,
-    Email VARCHAR(50) ,
+    AccountID INT PRIMARY KEY AUTO_INCREMENT,
+    Email VARCHAR(50),
     Username VARCHAR(50) UNIQUE,
-    FullName VARCHAR(50),
+    FullName VARCHAR(50) ,
     DepartmentID INT,
     PositionID INT,
     CreateDate DATE
 );
+
+ALTER TABLE `Account`
+MODIFY FullName NVARCHAR(50) DEFAULT N'Đoàn Minh Vương';
+SELECT 
+    *
+FROM
+    `Account`;
 
 CREATE TABLE IF NOT EXISTS `Group` (
     GroupID INT PRIMARY KEY AUTO_INCREMENT,
@@ -90,6 +97,8 @@ CREATE TABLE IF NOT EXISTS `Answer` (
    isCorrect BIT
 );
 
+ALTER TABLE Answer
+MODIFY isCorrect ENUM('Male','Female');
 CREATE TABLE IF NOT EXISTS `Exam` (
     ExamID INT PRIMARY KEY AUTO_INCREMENT,
     `Code` VARCHAR(50),
